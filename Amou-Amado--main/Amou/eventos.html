@@ -1,0 +1,173 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Eventos - Amou,Amado?</title>
+     <link rel="stylesheet" href="eventos.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+ 
+</head>
+<body>
+    <!-- Header atualizado -->
+    <header>
+        <div class="logo-search-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="imagens/logo.png" alt="Logo Amou, Amado?" class="main-logo">
+                </a>
+            </div>
+
+            <!-- Barra estática (apenas ícone) -->
+            <div class="search-bar">
+                <i class="fas fa-search static-search-icon"></i>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <!-- Mantido apenas o botão de Perfil -->
+            <a href="perfilcriador.html" class="header-btn btn-profile">
+                <i class="fas fa-user-circle"></i> <span class="btn-text">Login</span>
+            </a>
+        </div>
+    </header>
+
+    <!-- Page Header -->
+    <div class="page-header">
+        <h1>Eventos</h1>
+        <p>Explore nossa seleção de eventos culturais e educativos em Salvador</p>
+    </div>
+
+    <!-- Seção Teatro - 5 eventos -->
+    <section class="category-section">
+        <div class="section-header">
+            <h2 class="section-title">Teatro e Apresentações</h2>
+            <a href="Categoriaevento.html?categoria=teatro" class="btn-ver-tudo">
+                Ver tudo <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="events-grid" id="teatro-container">
+            <!-- Eventos de Teatro serão inseridos aqui via JS -->
+        </div>
+    </section>
+
+    <!-- Seção Palestras - 5 eventos -->
+    <section class="category-section">
+        <div class="section-header">
+            <h2 class="section-title">Palestras e Oficinas</h2>
+            <a href="Categoriaevento.html?categoria=palestras" class="btn-ver-tudo">
+                Ver tudo <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="events-grid" id="palestras-container">
+            <!-- Eventos de Palestras serão inseridos aqui via JS -->
+        </div>
+    </section>
+
+    <!-- Seção Shows - 5 eventos -->
+    <section class="category-section">
+        <div class="section-header">
+            <h2 class="section-title">Shows e Festas</h2>
+            <a href="Categoriaevento.html?categoria=shows" class="btn-ver-tudo">
+                Ver tudo <i class="fas fa-arrow-right"></i>
+            </a>
+        </div>
+
+        <div class="events-grid" id="shows-container">
+            <!-- Eventos de Shows serão inseridos aqui via JS -->
+        </div>
+    </section>
+
+    <!-- Rodapé -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>A Amou,Amado? é uma plataforma que buscar dar visibilidade para os eventos culturais e educativos feitos por e para o público LGBTQIA+ de Salvador.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="eventos.html">Eventos</a></li>
+                    <li><a href="#">Artistas</a></li>
+                    <li><a href="#">Locais</a></li>
+                    <li><a href="#">Promoções</a></li>
+                </ul>
+            </div>
+
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> Amouamadocontato@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> (71) 99999-9999</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Salvador, BA - Brasil</li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="copyright container">
+            <p>&copy; 2023 Amou,Amado?. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+<script>
+document.addEventListener("DOMContentLoaded", async () => {
+    try {
+        const resposta = await fetch("http://localhost:8080/api/eventos");
+        if (!resposta.ok) {
+            throw new Error("Erro ao buscar eventos");
+        }
+
+        const eventos = await resposta.json();
+
+        const categorias = {
+            teatro: document.getElementById("teatro-container"),
+            palestras: document.getElementById("palestras-container"),
+            shows: document.getElementById("shows-container")
+        };
+
+        for (const categoria in categorias) {
+            const container = categorias[categoria];
+            const eventosFiltrados = eventos
+                .filter(e => e.categoria?.toLowerCase() === categoria)
+                .slice(0, 5);
+
+            if (eventosFiltrados.length === 0) {
+                container.innerHTML = "<p>Nenhum evento encontrado.</p>";
+                continue;
+            }
+
+            container.innerHTML = eventosFiltrados.map(evento => `
+                <div class="event-card">
+                    <a href="detalheevento.html?id=${evento.id}">
+                        <img src="${evento.imagem || 'https://via.placeholder.com/300x180'}" alt="${evento.titulo}">
+                        <div class="event-info">
+                            <h3>${evento.titulo}</h3>
+                            <p>${evento.data || ''} - ${evento.local || ''}</p>
+                            <p>${evento.preco ? `R$ ${evento.preco.toFixed(2)}` : 'Gratuito'}</p>
+                        </div>
+                    </a>
+                </div>
+            `).join('');
+        }
+
+    } catch (error) {
+        console.error("Erro ao carregar eventos:", error);
+        document.getElementById("teatro-container").innerHTML = "<p>Erro ao carregar eventos.</p>";
+        document.getElementById("palestras-container").innerHTML = "<p>Erro ao carregar eventos.</p>";
+        document.getElementById("shows-container").innerHTML = "<p>Erro ao carregar eventos.</p>";
+    }
+});
+</script>
+
+</body>
+</html>
