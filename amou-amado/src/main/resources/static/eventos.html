@@ -135,11 +135,19 @@ document.addEventListener("DOMContentLoaded", async () => {
             shows: document.getElementById("shows-container")
         };
 
+const categoriaMap = {
+    teatro: "Teatro e apresentações",
+    palestras: "Palestras e Oficinas",
+    shows: "Shows e Festas"
+};
+
         for (const categoria in categorias) {
+            const nomeBackend = categoriaMap[categoria];
             const container = categorias[categoria];
-            const eventosFiltrados = eventos
-                .filter(e => e.categoria?.toLowerCase() === categoria)
-                .slice(0, 5);
+
+    const eventosFiltrados = eventos
+        .filter(e => e.categoria?.toLowerCase() === nomeBackend.toLowerCase())
+        .slice(0, 5);
 
             if (eventosFiltrados.length === 0) {
                 container.innerHTML = "<p>Nenhum evento encontrado.</p>";

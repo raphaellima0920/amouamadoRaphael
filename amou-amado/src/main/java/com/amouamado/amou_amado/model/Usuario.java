@@ -1,5 +1,6 @@
 package com.amouamado.amou_amado.model;
 
+import com.amouamado.amou_amado.validation.ValidationGroups.OnCreate;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.*;
 import java.time.LocalDateTime;
@@ -12,30 +13,30 @@ public class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @NotBlank(message = "Nome completo é obrigatório")
+    @NotBlank(message = "Nome completo é obrigatório", groups = OnCreate.class)
     private String nomeCompleto;
 
     private String nomeSocial;
     private String pronome;
     private String identidadeGenero;
 
-    @NotBlank(message = "DDD é obrigatório")
+    @NotBlank(message = "DDD é obrigatório", groups = OnCreate.class)
     @Pattern(regexp = "\\d{2}", message = "DDD deve ter 2 dígitos")
     private String ddd;
 
-    @NotBlank(message = "Telefone é obrigatório")
+    @NotBlank(message = "Telefone é obrigatório", groups = OnCreate.class)
     @Pattern(regexp = "\\d{9}", message = "Telefone deve ter 9 dígitos")
     private String telefone;
 
-    @NotBlank(message = "Email é obrigatório")
+    @NotBlank(message = "Email é obrigatório", groups = OnCreate.class)
     @Email(message = "Formato de email inválido")
     @Column(unique = true)
     private String email;
 
-    @NotBlank(message = "Senha é obrigatória")
+    @NotBlank(message = "Senha é obrigatória", groups = OnCreate.class)
     private String senha;
 
-    @NotBlank(message = "Área artística é obrigatória")
+    @NotBlank(message = "Área artística é obrigatória", groups = OnCreate.class)
     private String areaArtistica;
 
     @Column(columnDefinition = "TEXT")
@@ -54,8 +55,6 @@ public class Usuario {
     private String linkedin;
 
     private LocalDateTime criadoEm = LocalDateTime.now();
-
-
 public Long getId() {
     return id;
 }

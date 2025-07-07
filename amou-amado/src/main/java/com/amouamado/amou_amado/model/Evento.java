@@ -1,5 +1,6 @@
 package com.amouamado.amou_amado.model;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -11,13 +12,21 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+@ManyToOne(optional = true)
+@JoinColumn(name = "organizador_id", nullable = true)
+private Organizador organizador;
+
     private String titulo;
-    private String categoria;
+   
+    @ManyToOne
+    @JoinColumn(name = "categoria_id")
+    private Categoria categoria;
+
     private String local;
     private String imagem;
     private String duracao;
     private String classificacaoEtaria;
-    private String data;
+    private String dataEvento;
     private String horario;
     private Double preco;
     private String descricao;
@@ -31,4 +40,14 @@ public class Evento {
     private String telefoneContato;
     private String emailContato;
     private String websiteContato;
+    private String linkedin;
+    private String twitter; 
+
+    public Long getId() {
+    return id;
+    }
+
+    public void setId(Long id) {
+    this.id = id;
+    }
  }

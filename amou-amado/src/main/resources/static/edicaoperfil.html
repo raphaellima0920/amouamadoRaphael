@@ -274,16 +274,16 @@ document.addEventListener('DOMContentLoaded', function () {
     let avatarBase64 = null;
     let coverBase64 = null;
 
-    async function fetchOrganizador() {
-        const response = await fetch(`http://localhost:8080/api/organizadores/${id}`);
+    async function fetchUsuario() {
+        const response = await fetch(`http://localhost:8080/api/usuarios/${id}`);
         const data = await response.json();
 
-        document.getElementById('name').value = data.nome || '';
+        document.getElementById('name').value = data.nomeCompleto || '';
         document.getElementById('location').value = data.localizacao || '';
         document.getElementById('since').value = data.membroDesde || '';
-        document.getElementById('bio').value = data.biografia || '';
+        document.getElementById('bio').value = data.bio || '';
         document.getElementById('email').value = data.email || '';
-        document.getElementById('phone').value = data.telefone || '';
+        document.getElementById('phone').value = `(${data.ddd}) ${data.telefone}` || '';
         document.getElementById('website').value = data.website || '';
         document.getElementById('events').value = data.eventosRealizados || 0;
 
@@ -292,14 +292,14 @@ document.addEventListener('DOMContentLoaded', function () {
         document.getElementById('twitter').value = data.twitter || '';
         document.getElementById('linkedin').value = data.linkedin || '';
 
-        if (data.fotoPerfilUrl) {
-            avatarPreview.innerHTML = `<img src="${data.fotoPerfilUrl}" alt="Foto de perfil">`;
-            avatarBase64 = data.fotoPerfilUrl;
+        if (data.avatarUrl) {
+            avatarPreview.innerHTML = `<img src="${data.avatarUrl}" alt="Foto de perfil">`;
+            avatarBase64 = data.avatarUrl;
         }
 
-        if (data.fotoCapaUrl) {
-            coverPreview.innerHTML = `<img src="${data.fotoCapaUrl}" alt="Foto de capa">`;
-            coverBase64 = data.fotoCapaUrl;
+        if (data.coverUrl) {
+            coverPreview.innerHTML = `<img src="${data.coverUrl}" alt="Foto de capa">`;
+            coverBase64 = data.coverUrl;
         }
     }
 
@@ -331,29 +331,35 @@ document.addEventListener('DOMContentLoaded', function () {
     document.getElementById('edit-profile-form').addEventListener('submit', async (e) => {
         e.preventDefault();
 
-        const organizadorDTO = {
-            nome: document.getElementById('name').value,
+        const telefoneCompleto = document.getElementById('phone').value;
+        const telefoneLimpo = telefoneCompleto.replace(/\D/g, '');
+        const ddd = telefoneLimpo.substring(0, 2);
+        const telefone = telefoneLimpo.substring(2);
+
+        const usuarioDTO = {
+            nomeCompleto: document.getElementById('name').value,
             localizacao: document.getElementById('location').value,
             membroDesde: document.getElementById('since').value,
-            biografia: document.getElementById('bio').value,
+            bio: document.getElementById('bio').value,
             email: document.getElementById('email').value,
-            telefone: document.getElementById('phone').value,
+            ddd: ddd,
+            telefone: telefone,
             website: document.getElementById('website').value,
             eventosRealizados: parseInt(document.getElementById('events').value) || 0,
             instagram: document.getElementById('instagram').value,
             facebook: document.getElementById('facebook').value,
             twitter: document.getElementById('twitter').value,
             linkedin: document.getElementById('linkedin').value,
-            fotoPerfilUrl: avatarBase64,
-            fotoCapaUrl: coverBase64
+            avatarUrl: avatarBase64,
+            coverUrl: coverBase64
         };
 
-        const response = await fetch(`http://localhost:8080/api/organizadores/${id}`, {
+        const response = await fetch(`http://localhost:8080/api/usuarios/${id}`, {
             method: 'PUT',
             headers: {
                 'Content-Type': 'application/json'
             },
-            body: JSON.stringify(organizadorDTO)
+            body: JSON.stringify(usuarioDTO)
         });
 
         if (response.ok) {
@@ -370,9 +376,10 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     });
 
-    fetchOrganizador();
+    fetchUsuario();
 });
 </script>
+
 </body>
 
 </html>

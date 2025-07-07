@@ -7,6 +7,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import java.util.List;
+
+
+
 @RestController
 @RequestMapping("/api/eventos")
 @CrossOrigin(origins = "*")
@@ -15,11 +18,14 @@ public class EventoController {
     @Autowired
     private EventoService eventoService;
 
-    @PostMapping
-    public ResponseEntity<EventoDto> criarEvento(@RequestBody EventoDto eventoDto) {
-        EventoDto salvo = eventoService.criarEvento(eventoDto);
-        return ResponseEntity.ok(salvo);
-    }
+@PostMapping
+public ResponseEntity<EventoDto> criarEvento(@RequestBody EventoDto eventoDto) {
+    EventoDto salvo = eventoService.criarEvento(eventoDto);
+    return ResponseEntity.ok(salvo);
+}
+
+
+
 
     @GetMapping("/{id}")
     public ResponseEntity<EventoDto> buscarPorId(@PathVariable Long id) {
@@ -42,4 +48,13 @@ public ResponseEntity<List<EventoDto>> listarEventosPorOrganizador(@PathVariable
 public List<EventoDto> listarPorCategoria(@PathVariable String categoria) {
     return eventoService.buscarPorCategoria(categoria);
 }
+
+@GetMapping("/proximos")
+public ResponseEntity<List<EventoDto>> listarEventosFuturos() {
+    List<EventoDto> eventos = eventoService.listarEventosFuturos();
+    return ResponseEntity.ok(eventos);
+}
+
+
+
 }

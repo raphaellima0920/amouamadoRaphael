@@ -1,0 +1,383 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Evento com Navegação | Amou, Amado?</title>
+    <link rel="stylesheet" href="criacaoevento.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="logo-search-container">
+            <div class="logo-container">
+                <a href="index.html">
+                    <img src="imagens/logo.png" alt="Logo Amou, Amado?" class="main-logo">
+                </a>
+            </div>
+            
+            <div class="search-bar">
+                <input type="text" placeholder="Pesquisar eventos, artistas, locais..." aria-label="Campo de pesquisa">
+                <i class="fas fa-search search-icon"></i>
+            </div>
+        </div>
+
+        <div class="header-actions">
+            <button class="header-btn btn-create active">
+                <i class="fas fa-plus-circle"></i> <span class="btn-text">Criar Evento</span>
+            </button>
+            <button class="header-btn btn-events">
+                <i class="fas fa-calendar-check"></i> <span class="btn-text">Meus Eventos</span>
+            </button>
+            <button class="header-btn btn-profile">
+                <i class="fas fa-user-circle"></i> <span class="btn-text">Perfil</span>
+            </button>
+        </div>
+    </header>
+
+    <!-- Conteúdo Principal - Criação de Evento -->
+    <main class="container create-event-container">
+        <h1 class="page-title">Criar Novo Evento</h1>
+        
+        <div class="creation-steps">
+            <button class="step active" data-target="basic-info">Informações Básicas</button>
+            <button class="step" data-target="description">Descrição</button>
+            <button class="step" data-target="location">Localização</button>
+            <button class="step" data-target="tickets">Ingressos</button>
+            <button class="step" data-target="images">Imagens</button>
+            <button class="step" data-target="policies">Finalizar</button>
+        </div>
+<!-- HTML atualizado: Todos os campos "required" removidos -->
+<!-- Apenas a parte das seções e inputs foi incluída por limitação de espaço. -->
+<!-- Se quiser o arquivo completo com cabeçalho e rodapé, me avise. -->
+
+<form id="event-creation-form">
+  <div class="form-container">
+    <!-- Informacoes Basicas -->
+    <div class="form-section active-section" id="basic-info">
+      <h2 class="section-title">Informações Básicas</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-title">Título do Evento</label>
+          <input type="text" id="event-title" class="form-control" placeholder="Ex: Festival de Verão Salvador">
+        </div>
+
+        <div class="form-group">
+          <label for="event-category">Categoria</label>
+            <select id="event-category" class="form-control">
+            <option value="">Selecione uma categoria</option>
+            <option value="Teatro e apresentações">Teatro e apresentações</option>
+            <option value="Palestras e Oficinas">Palestras e Oficinas</option>
+            <option value="Shows e Festas">Shows e Festas</option>
+            </select>
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-date">Data</label>
+          <input type="date" id="event-date" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="event-time">Horário</label>
+          <input type="time" id="event-time" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="event-duration">Duração</label>
+          <input type="text" id="event-duration" class="form-control" placeholder="Ex: 4 horas">
+        </div>
+      </div>
+    </div>
+
+    <!-- Descrição -->
+    <div class="form-section" id="description">
+      <h2 class="section-title">Descrição</h2>
+
+      <div class="form-group">
+        <label for="event-description">Descrição do Evento</label>
+        <textarea id="event-description" class="form-control" placeholder="Descreva detalhadamente seu evento..."></textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="event-highlights">Destaques</label>
+        <textarea id="event-highlights" class="form-control" placeholder="Destaques do evento..."></textarea>
+      </div>
+    </div>
+
+    <!-- Localização -->
+    <div class="form-section" id="location">
+      <h2 class="section-title">Localização</h2>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-location-name">Nome do Local</label>
+          <input type="text" id="event-location-name" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-address">Endereço</label>
+          <input type="text" id="event-address" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="event-neighborhood">Bairro</label>
+          <input type="text" id="event-neighborhood" class="form-control">
+        </div>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-city">Cidade</label>
+          <input type="text" id="event-city" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="event-state">Estado</label>
+          <select id="event-state" class="form-control">
+            <option value="">Selecione um estado</option>
+            <option value="BA">Bahia</option>
+            <option value="SP">São Paulo</option>
+            <option value="RJ">Rio de Janeiro</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="event-zipcode">CEP</label>
+          <input type="text" id="event-zipcode" class="form-control">
+        </div>
+      </div>
+    </div>
+
+    <!-- Contato -->
+    <div class="form-section" id="policies">
+      <h2 class="section-title">Políticas e Contato</h2>
+
+      <div class="form-group">
+        <label for="event-policies">Políticas do Evento</label>
+        <textarea id="event-policies" class="form-control"></textarea>
+      </div>
+
+      <div class="form-row">
+        <div class="form-group">
+          <label for="event-contact-phone">Telefone para Contato</label>
+          <input type="tel" id="event-contact-phone" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="event-contact-email">E-mail para Contato</label>
+          <input type="email" id="event-contact-email" class="form-control">
+        </div>
+
+        <div class="form-group">
+          <label for="event-contact-website">Website</label>
+          <input type="url" id="event-contact-website" class="form-control">
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-actions">
+    <button type="button" class="btn btn-preview">
+      <i class="fas fa-eye"></i> Visualizar Evento
+    </button>
+    <button type="button" class="btn btn-save">
+      <i class="fas fa-save"></i> Salvar Rascunho
+    </button>
+    <button type="submit" class="btn btn-publish">
+      <i class="fas fa-check-circle"></i> Publicar Evento
+    </button>
+  </div>
+</form>
+    </main>
+    
+    <!-- Rodapé -->
+    <footer>
+        <div class="container footer-content">
+            <div class="footer-section">
+                <h3>Sobre Nós</h3>
+                <p>A Amou,Amado? é uma plataforma que buscar dar visibilidade para os eventos culturais e educativos feitos por e para o público LGBTQIA+ de Salvador.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Links Rápidos</h3>
+                <ul class="footer-links">
+                    <li><a href="#">Home</a></li>
+                    <li><a href="#">Eventos</a></li>
+                    <li><a href="#">Artistas</a></li>
+                    <li><a href="#">Locais</a></li>
+                    <li><a href="#">Promoções</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contato</h3>
+                <ul class="footer-links">
+                    <li><i class="fas fa-envelope"></i> Amouamadocontato@gmail.com</li>
+                    <li><i class="fas fa-phone"></i> (71) 99999-9999</li>
+                    <li><i class="fas fa-map-marker-alt"></i> Salvador, BA - Brasil</li>
+                </ul>
+            </div>
+        </div>
+        
+        <div class="copyright container">
+            <p>&copy; 2023 ShowTime. Todos os direitos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/js/all.min.js"></script>
+   <script>
+// const token = localStorage.getItem('token');
+// if (!token) {
+//     alert("Você precisa estar logado para acessar esta página.");
+//     window.location.href = "login.html";
+// }
+
+
+
+    // Navegação entre etapas
+    document.querySelectorAll('.step').forEach(step => {
+        step.addEventListener('click', function() {
+            const targetId = this.getAttribute('data-target');
+
+            document.querySelectorAll('.form-section').forEach(section => {
+                section.classList.remove('active-section');
+            });
+
+            document.getElementById(targetId).classList.add('active-section');
+
+            document.querySelectorAll('.step').forEach(s => {
+                s.classList.remove('active');
+            });
+            this.classList.add('active');
+        });
+    });
+
+    // Adicionar novo ingresso
+    document.getElementById('add-ticket').addEventListener('click', function () {
+        const container = document.getElementById('ticket-container');
+        const newItem = document.createElement('div');
+        newItem.className = 'price-item';
+        newItem.innerHTML = `
+            <button class="remove-btn" type="button">
+                <i class="fas fa-times-circle"></i>
+            </button>
+            <div class="form-group">
+                <label>Nome do Ingresso</label>
+                <input type="text" class="form-control" placeholder="Ex: Pista Comum">
+            </div>
+            <div class="form-group">
+                <label>Preço (R$)</label>
+                <input type="number" class="form-control" placeholder="0.00" min="0" step="0.01">
+            </div>
+            <div class="form-group">
+                <label>Quantidade</label>
+                <input type="number" class="form-control" placeholder="Ilimitado" min="0">
+            </div>
+        `;
+        container.appendChild(newItem);
+
+        newItem.querySelector('.remove-btn').addEventListener('click', function () {
+            container.removeChild(newItem);
+        });
+    });
+
+    // Remover ingresso
+    document.querySelectorAll('.remove-btn').forEach(button => {
+        button.addEventListener('click', function () {
+            this.closest('.price-item').remove();
+        });
+    });
+
+    // Validação dos campos obrigatórios
+    function validateRequiredFields() {
+        const requiredFields = [
+            'event-title', 'event-category', 'event-date', 'event-time',
+            'event-location-name', 'event-address', 'event-neighborhood',
+            'event-city', 'event-state', 'event-description'
+        ];
+
+        for (const fieldId of requiredFields) {
+            const field = document.getElementById(fieldId);
+            if (!field.value.trim()) {
+                alert(`O campo "${field.previousElementSibling.textContent.replace('*', '').trim()}" é obrigatório!`);
+                field.focus();
+                return false;
+            }
+        }
+        return true;
+    }
+
+    // Submissão do formulário
+// Submissão do formulário sem validações obrigatórias
+document.getElementById('event-creation-form').addEventListener('submit', async function (e) {
+    e.preventDefault();
+
+    const firstTicket = document.querySelector('.price-item');
+    const precoInput = firstTicket ? firstTicket.querySelector('input[type="number"]') : null;
+    const preco = precoInput ? parseFloat(precoInput.value) : 0.0;
+
+    const evento = {
+        titulo: document.getElementById('event-title').value,
+        categoria: document.getElementById('event-category').value,
+        local: document.getElementById('event-location-name').value,
+        imagem: "placeholder.jpg",
+        duracao: document.getElementById('event-duration').value,
+        classificacaoEtaria: document.getElementById('event-rating').value,
+        data: document.getElementById('event-date').value,
+        horario: document.getElementById('event-time').value,
+        preco: preco,
+        descricao: document.getElementById('event-description').value,
+        politicas: document.getElementById('event-policies').value,
+        destaques: document.getElementById('event-highlights').value,
+        artistas: document.getElementById('event-artists').value,
+        bairro: document.getElementById('event-neighborhood').value,
+        cidade: document.getElementById('event-city').value,
+        estado: document.getElementById('event-state').value,
+        cep: document.getElementById('event-zipcode').value,
+        telefoneContato: document.getElementById('event-contact-phone').value,
+        emailContato: document.getElementById('event-contact-email').value,
+        websiteContato: document.getElementById('event-contact-website').value
+    };
+
+    try {
+        const res = await fetch('http://localhost:8080/api/eventos', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(evento)
+        });
+
+        if (res.ok) {
+            alert('Evento criado com sucesso!');
+            window.location.href = 'gerenciareventos.html';
+        } else {
+            const errorText = await res.text();
+            alert('Erro ao criar evento: ' + errorText);
+        }
+    } catch (err) {
+        console.error('Erro:', err);
+        alert('Erro ao criar evento: ' + err.message);
+    }
+});
+
+// Botão de salvar rascunho (sem validação)
+document.querySelector('.btn-save').addEventListener('click', function () {
+    alert('Rascunho salvo (validação desativada).');
+});
+
+</script>
+</body>
+</html>

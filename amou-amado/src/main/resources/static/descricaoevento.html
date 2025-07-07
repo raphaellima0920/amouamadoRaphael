@@ -298,18 +298,36 @@ document.addEventListener("DOMContentLoaded", function () {
             return response.json();
         })
         .then(evento => {
-            // Preenchendo os dados na página
+            console.log("Evento recebido:", evento); // Para debug
+
+            // Título e categoria
             document.querySelector(".event-title").textContent = evento.titulo;
             document.querySelector(".event-category").textContent = evento.categoria;
-            document.querySelector(".event-image img").src = evento.imagem;
-            document.querySelector(".event-location p").textContent = evento.local;
-            document.querySelector(".event-date p").textContent = `${evento.data} às ${evento.horario}`;
-            document.querySelector(".event-price").textContent = evento.preco === 0 ? "Gratuito" : `R$ ${evento.preco.toFixed(2)}`;
-            document.querySelector(".event-duration p").textContent = evento.duracao;
-            document.querySelector(".event-info .event-body .event-description p").textContent = evento.descricao;
-            document.querySelector(".event-classification p").textContent = evento.classificacaoEtaria;
 
-            // Destaques (separados por quebra de linha ou vírgula)
+            // Imagem
+            document.querySelector(".event-image img").src = evento.imagem;
+
+            // Meta informações
+            const metaItems = document.querySelectorAll(".meta-item");
+            metaItems[0].querySelector("p").textContent = evento.local;
+            metaItems[1].querySelector("p").textContent = evento.data
+                ? `${evento.data} às ${evento.horario}`
+                : `Horário: ${evento.horario}`;
+            metaItems[2].querySelector("p").textContent = evento.duracao;
+            metaItems[3].querySelector("p").textContent = evento.classificacaoEtaria;
+
+            // Preço
+            document.querySelector(".event-price").textContent =
+                evento.preco === 0 ? "Gratuito" : `R$ ${evento.preco.toFixed(2)}`;
+
+            // Descrição
+            const descricaoContainer = document.querySelector(".event-description");
+            descricaoContainer.innerHTML = `
+                <h2 class="section-title">Descrição do Evento</h2>
+                <p>${evento.descricao}</p>
+            `;
+
+            // Destaques
             const destaquesContainer = document.querySelector(".event-highlights");
             destaquesContainer.innerHTML = `<h3 class="section-title">Destaques</h3>`;
             if (evento.destaques) {
@@ -328,8 +346,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Artistas
             const artistasList = document.querySelector(".artist-list");
+            artistasList.innerHTML = "";
             if (evento.artistas) {
-                artistasList.innerHTML = "";
                 evento.artistas.split(/\n|,/).forEach(artista => {
                     if (artista.trim()) {
                         const li = document.createElement("li");
@@ -341,8 +359,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
             // Políticas
             const policyList = document.querySelector(".policy-list");
+            policyList.innerHTML = "";
             if (evento.politicas) {
-                policyList.innerHTML = "";
                 evento.politicas.split(/\n|,/).forEach(politica => {
                     if (politica.trim()) {
                         const li = document.createElement("li");
@@ -360,11 +378,11 @@ document.addEventListener("DOMContentLoaded", function () {
                 <li>Site: ${evento.websiteContato || "(não informado)"}</li>
             `;
 
-            // Criador (placeholder)
-            document.querySelector(".creator-name").textContent = evento.titulo;
-            document.getElementById("creator-profile").href = `perfil-criador.html?id=${evento.id}`;
+            // Criador (simples - opcionalmente pode puxar dados reais)
+            document.querySelector(".creator-name").textContent = evento.organizador?.nome || "Organizador não informado";
+            document.getElementById("creator-profile").href = `perfil-criador.html?id=${evento.organizador?.id || ""}`;
 
-            // Mapa/localização (se quiser integrar com Google Maps futuramente)
+            // Mapa/localização
             document.querySelector("#map-placeholder p").textContent = evento.local;
         })
         .catch(error => {
@@ -390,5 +408,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 });
 </script>
+
 </body>
 </html>
