@@ -16,5 +16,7 @@ public interface EventoService {
     List<EventoDto> buscarPorCategoria(String categoria);
     List<EventoDto> listarPorOrganizador(Long idOrganizador);
     List<EventoDto> listarEventosFuturos();
+    List<EventoDto> listarPorUsuario(Long usuarioId);
+
 
 }

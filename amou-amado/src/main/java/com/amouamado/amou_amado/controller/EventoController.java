@@ -33,11 +33,13 @@ public ResponseEntity<EventoDto> criarEvento(@RequestBody EventoDto eventoDto) {
         return ResponseEntity.ok(dto);
     }
 
-    @GetMapping("/organizador/{idOrganizador}/eventos")
-public ResponseEntity<List<EventoDto>> listarEventosPorOrganizador(@PathVariable Long idOrganizador) {
-    List<EventoDto> eventos = eventoService.listarPorOrganizador(idOrganizador);
+ @GetMapping("/usuario/{idUsuario}")
+public ResponseEntity<List<EventoDto>> listarEventosPorUsuario(@PathVariable Long idUsuario) {
+    List<EventoDto> eventos = eventoService.listarPorUsuario(idUsuario);
     return ResponseEntity.ok(eventos);
 }
+
+
 
     @GetMapping
     public List<EventoDto> listarEventos() {

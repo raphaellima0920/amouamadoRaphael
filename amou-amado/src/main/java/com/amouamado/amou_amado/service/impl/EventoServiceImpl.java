@@ -98,6 +98,15 @@ public class EventoServiceImpl implements EventoService {
     }
 
     @Override
+public List<EventoDto> listarPorUsuario(Long usuarioId) {
+    List<Evento> eventos = eventoRepository.findByOrganizador_Id(usuarioId);
+    return eventos.stream()
+                  .map(this::toDto)
+                  .collect(Collectors.toList());
+}
+
+
+    @Override
     public List<EventoDto> buscarPorCategoria(String categoriaNome) {
         Optional<Categoria> categoriaOpt = categoriaRepository.findByNomeIgnoreCase(categoriaNome);
         if (categoriaOpt.isEmpty()) {
