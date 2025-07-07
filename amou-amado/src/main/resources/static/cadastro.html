@@ -17,7 +17,7 @@
             <a href="index.html">
                 <!-- Logo placeholder -->
                 <a href="index.html">
-                    <img src="imagens/logo.png" alt="Logo Amou, Amado?" class="main-logo">
+                    <img src="lg.png" alt="Logo Amou, Amado?" class="main-logo">
                 </a>
             </a>
         </div>
@@ -38,10 +38,7 @@
         <div class="signup-form-container">
             <div class="signup-card">
                 <!-- Logo placeholder -->
-                <div class="signup-logo"
-                    style="background: linear-gradient(135deg, var(--primary), var(--secondary)); width: 120px; height: 120px; border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: bold; margin: 0 auto 20px;">
-                    <i class="fas fa-heart" style="font-size: 3rem;"></i>
-                </div>
+                
                 <h1 class="signup-title">Crie sua conta</h1>
                 <p class="signup-subtitle">Junte-se à comunidade LGBTQIA+ de Salvador e descubra eventos incríveis!</p>
 
@@ -155,58 +152,7 @@
             </div>
         </div>
 
-        <!-- Banner Lateral (direita) -->
-        <div class="banner-container">
-            <div class="banner">
-                <h2 class="banner-title">Junte-se à Nossa Comunidade!</h2>
-                <p class="banner-text">Faça parte da maior plataforma de eventos LGBTQIA+ de Salvador e transforme sua
-                    experiência cultural.</p>
-
-                <div class="banner-benefits">
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-calendar-check"></i>
-                        </div>
-                        <div class="benefit-text">Acesso a eventos exclusivos e promoções especiais</div>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-users"></i>
-                        </div>
-                        <div class="benefit-text">Conecte-se com artistas e produtores culturais</div>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-ticket-alt"></i>
-                        </div>
-                        <div class="benefit-text">Reserve ingressos com facilidade e segurança</div>
-                    </div>
-
-                    <div class="benefit-item">
-                        <div class="benefit-icon">
-                            <i class="fas fa-star"></i>
-                        </div>
-                        <div class="benefit-text">Destaque seu trabalho artístico na plataforma</div>
-                    </div>
-                </div>
-
-                <p class="banner-text">Sua voz importa. Sua arte transforma. Sua identidade é celebrada.</p>
-
-                <div class="banner-icons">
-                    <div class="banner-icon">
-                        <i class="fab fa-instagram"></i>
-                    </div>
-                    <div class="banner-icon">
-                        <i class="fab fa-facebook-f"></i>
-                    </div>
-                    <div class="banner-icon">
-                        <i class="fab fa-twitter"></i>
-                    </div>
-                </div>
-            </div>
-        </div>
+       
     </main>
 
     <!-- Rodapé -->
@@ -249,84 +195,7 @@
             <p>&copy; 2023 Amou,Amado?. Todos os direitos reservados. Orgulhosamente LGBTQIA+</p>
         </div>
     </footer>
-<script>
-    document.getElementById('signup-form').addEventListener('submit', async function (e) {
-        e.preventDefault();
-
-        // Coleta dos dados do formulário
-        const fullName = document.getElementById('fullName').value;
-        const socialName = document.getElementById('socialName').value;
-        const pronoun = document.getElementById('pronoun').value;
-        const gender = document.getElementById('gender').value;
-        const ddd = document.getElementById('ddd').value;
-        const phone = document.getElementById('phone').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
-        const artArea = document.getElementById('artArea').value;
-        const bio = document.getElementById('bio').value;
-        const terms = document.getElementById('terms').checked;
-
-        // Validações básicas
-        if (!fullName || !ddd || !phone || !email || !password || !confirmPassword || !artArea || !terms) {
-            alert('Por favor, preencha todos os campos obrigatórios.');
-            return;
-        }
-
-        if (password !== confirmPassword) {
-            alert('As senhas não coincidem. Por favor, verifique.');
-            return;
-        }
-
-        // Montagem do objeto para envio à API
-        const payload = {
-            nomeCompleto: fullName,
-            nomeSocial: socialName,
-            pronome: pronoun,
-            identidadeGenero: gender,
-            ddd: ddd,
-            telefone: phone,
-            email: email,
-            senha: password,
-            areaArtistica: artArea,
-            bio: bio
-        };
-
-        try {
-            const response = await fetch('http://localhost:8080/api/usuarios', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(payload)
-            });
-
-            if (response.ok) {
-                alert('Cadastro realizado com sucesso! Bem-vindo(a) à comunidade Amou, Amado?');
-                window.location.href = 'login.html';
-            } else {
-                const erro = await response.json();
-                alert('Erro ao cadastrar: ' + (erro.message || 'Verifique os dados e tente novamente.'));
-            }
-        } catch (error) {
-            alert('Erro ao conectar com o servidor.');
-            console.error(error);
-        }
-    });
-
-    // Formatação do campo de telefone
-    document.getElementById('phone').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 9) value = value.slice(0, 9);
-        e.target.value = value;
-    });
-
-    document.getElementById('ddd').addEventListener('input', function (e) {
-        let value = e.target.value.replace(/\D/g, '');
-        if (value.length > 2) value = value.slice(0, 2);
-        e.target.value = value;
-    });
-</script>
+   <script src="cadastro.js" async></script>
 </body>
 
 </html>
