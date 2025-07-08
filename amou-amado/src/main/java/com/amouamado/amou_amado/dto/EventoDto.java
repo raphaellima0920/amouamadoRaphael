@@ -1,11 +1,11 @@
 package com.amouamado.amou_amado.dto;
 
-import com.amouamado.amou_amado.model.Organizador;
+import com.amouamado.amou_amado.model.Usuario;
 
 public class EventoDto {
 
     private Long id;
-    private Organizador organizador;
+    private Usuario usuario;
     private String titulo;
     private String categoria;
     private String local;
@@ -254,11 +254,11 @@ public class EventoDto {
         this.websiteContato = websiteContato;
     }
 
-      public Organizador getOrganizador() {
-        return organizador;
+      public Usuario getUsuario() {
+        return usuario;
     }
 
-    public void setOrganizador(Organizador organizador) {
-        this.organizador = organizador;
+    public void setUsuario(Usuario usuario) {
+        this.usuario = usuario;
     }
 }

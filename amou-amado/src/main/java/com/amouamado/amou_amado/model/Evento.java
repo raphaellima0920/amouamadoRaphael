@@ -13,8 +13,8 @@ public class Evento {
     private Long id;
 
 @ManyToOne(optional = true)
-@JoinColumn(name = "organizador_id", nullable = true)
-private Organizador organizador;
+@JoinColumn(name = "usuario_id", nullable = true)
+private Usuario usuario;
 
     private String titulo;
    
