@@ -14,7 +14,6 @@ public interface EventoService {
     EventoDto atualizar(Long id,EventoDto eventoDto);
     void deletar(Long id);
     List<EventoDto> buscarPorCategoria(String categoria);
-    List<EventoDto> listarPorOrganizador(Long idOrganizador);
     List<EventoDto> listarEventosFuturos();
     List<EventoDto> listarPorUsuario(Long usuarioId);
 
